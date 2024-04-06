@@ -5,9 +5,7 @@ import me.mina.fooddeli.model.Reviewable;
 import me.mina.fooddeli.utils.Utils;
 import me.mina.fooddeli.model.order.Order;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 public class Restaurant implements Comparable<Restaurant>, Reviewable {
 
@@ -15,10 +13,8 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
     private String name;
     private List<MenuItem> menu;
     private List<Review> reviews;
-
     private Queue<Order> queue;
 
-    private double averageRating;
 
     public Restaurant(int id, String name, List<MenuItem> menu, List<Review> reviews, Queue<Order> queue, double averageRating) {
         this.id = id;
@@ -26,14 +22,31 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
         this.menu = menu;
         this.reviews = reviews;
         this.queue = queue;
-        this.averageRating = averageRating;
+    }
+
+    public Restaurant(String name, List<MenuItem> menu, List<Review> reviews, Queue<Order> queue, double averageRating) {
+        this.name = name;
+        this.menu = menu;
+        this.reviews = reviews;
+        this.queue = queue;
     }
 
     public Restaurant(int id, String name, List<MenuItem> menu) {
         this.id = id;
         this.name = name;
         this.menu = menu;
+        this.reviews = new ArrayList<>();
+        this.queue = new LinkedList<Order>();
     }
+
+    public Restaurant(String name, List<MenuItem> menu) {
+        this.name = name;
+        this.menu = menu;
+        this.reviews = new ArrayList<>();
+        this.queue = new LinkedList<Order>();
+    }
+
+
 
     public int getId() {
         return id;
@@ -59,13 +72,16 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
         this.menu = menu;
     }
 
+    public void setQueue(Queue<Order> queue) {
+        this.queue = queue;
+    }
+
     public List<Review> getReviews() {
         return reviews;
     }
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-        averageRating = Utils.reviewsToRating(reviews);
     }
 
     public Queue<Order> getQueue() {
@@ -74,7 +90,11 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
 
     public void addReview(Review review) {
         reviews.add(review);
-        averageRating = Utils.reviewsToRating(reviews);
+    }
+
+    @Override
+    public void removeReview(Review review) {
+        reviews.remove(review);
     }
 
     @Override
@@ -82,7 +102,7 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
         if (this == o) return true;
         if (!(o instanceof Restaurant that)) return false;
         return id == that.id
-                && Double.compare(averageRating, that.averageRating) == 0
+                && Double.compare(getAverageRating(), that.getAverageRating()) == 0
                 && Objects.equals(name, that.name)
                 && Objects.equals(Utils.objectListToString(menu),
                                   Utils.objectListToString(that.menu))
@@ -91,16 +111,27 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
     }
 
     @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", menu=" + Utils.objectListToString(menu) +
+                ", reviews=" + Utils.objectListToString(reviews) +
+                ", queue=" + Utils.queueToString(queue) +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(name, menu, reviews, queue, averageRating);
+        return Objects.hash(name, menu, reviews, queue, getAverageRating());
     }
 
     public double getAverageRating() {
-        return averageRating;
+        return Utils.reviewsToRating(reviews);
     }
 
     @Override
     public int compareTo(Restaurant o) {
-        return Math.round((float)(o.getAverageRating()-averageRating));
+        return Math.round((float)(o.getAverageRating()-getAverageRating()));
     }
 }

@@ -9,13 +9,13 @@ import java.util.Objects;
 public class PremiumUser extends User {
     private double discountRate;
 
-    public PremiumUser(String name, String password, UserInfo userInfo, List<Order> orderHistory, double discountRate) {
-        super(name, password, userInfo, orderHistory);
+    public PremiumUser(String name, String password, UserInfo userInfo, double discountRate) {
+        super(name, password, userInfo);
         this.discountRate = discountRate;
     }
 
-    public PremiumUser(String name, String password, UserInfo userInfo, double discountRate) {
-        super(name, password, userInfo);
+    public PremiumUser(int id, String name, String password, UserInfo userInfo, double discountRate) {
+        super(id, name, password, userInfo);
         this.discountRate = discountRate;
     }
 
@@ -35,8 +35,7 @@ public class PremiumUser extends User {
         return Double.compare(discountRate, that.discountRate) == 0
                 && Objects.equals(getName(), that.getName())
                 && Objects.equals(getPassword(), that.getPassword())
-                && Objects.equals(getUserInfo(), that.getUserInfo())
-                && Objects.equals(Utils.objectListToString(getOrderHistory()), Utils.objectListToString(that.getOrderHistory()));
+                && Objects.equals(getUserInfo(), that.getUserInfo());
 
     }
 
@@ -51,7 +50,6 @@ public class PremiumUser extends User {
                 "name='" + getName() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 ", userInfo=" + getUserInfo() +
-                ", orderHistory=" + Utils.objectListToString(getOrderHistory()) +
                 ", discountRate=" + discountRate +
                 '}';
     }

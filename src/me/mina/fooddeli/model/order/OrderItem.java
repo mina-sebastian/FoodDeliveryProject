@@ -5,7 +5,6 @@ import me.mina.fooddeli.model.restaurant.MenuItem;
 import java.util.Objects;
 
 public class OrderItem {
-
     private int id;
     private MenuItem item;
     private int quantity;
@@ -13,6 +12,11 @@ public class OrderItem {
 
     public OrderItem(int id, MenuItem item, int quantity) {
         this.id = id;
+        this.item = item;
+        this.quantity = quantity;
+    }
+
+    public OrderItem(MenuItem item, int quantity) {
         this.item = item;
         this.quantity = quantity;
     }
@@ -59,7 +63,7 @@ public class OrderItem {
     public String toString() {
         return "OrderItem{" +
                 "id=" + id +
-                "item=" + item +
+                ", item=" + item +
                 ", quantity=" + quantity +
                 '}';
     }

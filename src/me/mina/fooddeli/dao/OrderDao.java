@@ -1,60 +1,62 @@
-package me.mina.fooddeli.repository;
+package me.mina.fooddeli.dao;
 
-import me.mina.fooddeli.dao.OrderDaoService;
 import me.mina.fooddeli.model.order.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class OrderRepository {
+public class OrderDao implements Dao<Order> {
 
-    private static OrderDaoService orderDaoService;
+    //Simulam baza de date
+    private static List<Order> orders = null;
 
-    private static List<Order> orders;
-
-    public OrderRepository() {
-        if (orderDaoService == null) {
-            orderDaoService = new OrderDaoService();
-        }
-
+    public OrderDao() {
+        //TODO de inlocuit cu conexiunea la baza de date
         if (orders == null) {
-            orders = orderDaoService.getAll();
+            orders = new ArrayList<>();
         }
     }
 
+    @Override
     public Optional<Order> get(int id) {
+        //TODO De folosit baza de date
         return orders.stream()
                 .filter(order -> order.getId() == id)
-                .findFirst()
-                .or(() -> orderDaoService.get(id));
+                .findFirst();
     }
 
+    @Override
     public List<Order> getAll() {
-        return orders;
+        //TODO De folosit baza de date
+        return new ArrayList<>(orders);
     }
 
+    @Override
     public void create(Order order) {
-        orderDaoService.create(order);
-        // If database fails, do not add to the list
+        //TODO De folosit baza de date
         orders.add(order);
     }
 
+    @Override
     public void update(int id, Order order) {
         Optional<Order> orderOptional = get(id);
+        //TODO De folosit baza de date
         if (orderOptional.isPresent()) {
             Order orderToUpdate = orderOptional.get();
             orderToUpdate.setStatus(order.getStatus());
             orderToUpdate.setItems(order.getItems());
             orderToUpdate.setUserInfo(order.getUserInfo());
-            orderDaoService.update(id, order);
+        }else{
+            System.out.println("Update error: The order with id " + id + " does not exist");
+
         }
     }
 
+
+    @Override
     public void delete(Order order) {
-        orderDaoService.delete(order);
-        // If database fails, do not delete from the list
+        //TODO De folosit baza de date
         orders.remove(order);
     }
-
-
 }

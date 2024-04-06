@@ -21,8 +21,20 @@ public class Order {
         this.status = status;
     }
 
+    public Order(UserInfo userInfo, List<OrderItem> items, OrderStatus status) {
+        this.userInfo = userInfo;
+        this.items = items;
+        this.status = status;
+    }
+
     public Order(int id, UserInfo userInfo) {
         this.id = id;
+        this.userInfo = userInfo;
+        this.items = new ArrayList<>();
+        this.status = OrderStatus.NOT_SUBMITTED;
+    }
+
+    public Order(UserInfo userInfo) {
         this.userInfo = userInfo;
         this.items = new ArrayList<>();
         this.status = OrderStatus.NOT_SUBMITTED;
@@ -78,7 +90,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                "items=" + Utils.objectListToString(items) +
+                ", items=" + Utils.objectListToString(items) +
                 ", status=" + status +
                 ", userInfo=" + userInfo +
                 '}';
