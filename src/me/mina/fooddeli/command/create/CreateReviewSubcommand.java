@@ -58,7 +58,7 @@ public class CreateReviewSubcommand extends Command {
             case "delivery":
                 System.out.println("Enter delivery person username: ");
                 String deliveryPersonUsername = getScanner().nextLine();
-                Optional<DeliveryPerson> deliveryPersonOptional = deliveryPersonRepositoryService.getByUsername(deliveryPersonUsername);
+                Optional<DeliveryPerson> deliveryPersonOptional = deliveryPersonRepositoryService.findByUsername(deliveryPersonUsername);
                 if (deliveryPersonOptional.isEmpty()) {
                     return "Delivery person not found.";
                 }

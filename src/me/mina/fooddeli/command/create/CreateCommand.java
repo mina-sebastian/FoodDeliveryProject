@@ -9,8 +9,6 @@ public class CreateCommand extends Command {
 
     @Override
     public String execute() {
-        System.out.println("Choose a subcommand: " + getPossibleSubcommands());
-        String cmd = getScanner().nextLine();
-        return executeSubcommand(cmd);
+        return choosePrompt();
     }
 }

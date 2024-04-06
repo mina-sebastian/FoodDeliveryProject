@@ -1,6 +1,6 @@
 package me.mina.fooddeli.command;
 
-import me.mina.fooddeli.Application;
+import me.mina.fooddeli.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public abstract class Command {
     }
 
     public Scanner getScanner() {
-        return Application.getInstance().getScanner();
+        return Main.getInstance().getScanner();
     }
 
     public Command getSubcommand(String subcommand) {
@@ -55,6 +55,12 @@ public abstract class Command {
         return subcommands.stream()
                 .map(Command::getCommand)
                 .collect(Collectors.joining(", "));
+    }
+
+    public String choosePrompt(){
+        System.out.println("Choose a subcommand: " + getPossibleSubcommands());
+        String cmd = getScanner().nextLine();
+        return executeSubcommand(cmd);
     }
 
     public String getCommand() {

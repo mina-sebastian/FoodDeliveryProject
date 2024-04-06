@@ -90,9 +90,9 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", items=" + Utils.objectListToString(items) +
                 ", status=" + status +
                 ", userInfo=" + userInfo +
+                ", items=" + Utils.objectListToString(items) +
                 '}';
     }
 }

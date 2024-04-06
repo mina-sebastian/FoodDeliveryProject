@@ -2,8 +2,8 @@ package me.mina.fooddeli;
 
 import java.util.Scanner;
 
-public class Application {
-    private static Application instance;
+public class Main {
+    private static Main instance;
     private static Scanner scanner;
 
     public static void main(String[] args) {
@@ -26,9 +26,9 @@ public class Application {
         return scanner;
     }
 
-    public static Application getInstance() {
+    public static Main getInstance() {
         if (instance == null) {
-            instance = new Application();
+            instance = new Main();
         }
         return instance;
     }

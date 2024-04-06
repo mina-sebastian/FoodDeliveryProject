@@ -125,9 +125,15 @@ public class DeliveryPersonRepositoryService {
                 });
     }
 
-    public Optional<DeliveryPerson> getByUsername(String username) {
+    public Optional<DeliveryPerson> findByUsername(String username) {
         return deliveryPersons.stream()
                 .filter(deliveryPerson -> deliveryPerson.getName().equals(username))
+                .findFirst();
+    }
+
+    public Optional<DeliveryPerson> findFirstAvailable() {
+        return getAll().stream()
+                .filter(deliveryPerson -> deliveryPerson.getCurrentOrder() == null)
                 .findFirst();
     }
 

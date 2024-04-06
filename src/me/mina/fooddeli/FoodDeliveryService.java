@@ -2,12 +2,19 @@ package me.mina.fooddeli;
 
 import me.mina.fooddeli.command.Command;
 import me.mina.fooddeli.command.HelpCommand;
+import me.mina.fooddeli.command.MyOrderInfoCommand;
 import me.mina.fooddeli.command.create.*;
 import me.mina.fooddeli.command.show.*;
+import me.mina.fooddeli.command.work.WorkCommand;
+import me.mina.fooddeli.command.work.WorkDeliveryPersonCommand;
+import me.mina.fooddeli.command.work.WorkRestaurantCommand;
 import me.mina.fooddeli.daoservices.DeliveryPersonRepositoryService;
 import me.mina.fooddeli.daoservices.OrderRepositoryService;
 import me.mina.fooddeli.daoservices.RestaurantRepositoryService;
 import me.mina.fooddeli.daoservices.UserRepositoryService;
+import me.mina.fooddeli.model.order.Order;
+import me.mina.fooddeli.model.order.OrderItem;
+import me.mina.fooddeli.model.order.OrderStatus;
 import me.mina.fooddeli.model.restaurant.MenuItem;
 import me.mina.fooddeli.model.restaurant.Restaurant;
 import me.mina.fooddeli.model.person.PremiumUser;
@@ -56,6 +63,8 @@ public class FoodDeliveryService {
         commands = new ArrayList<>();
         HelpCommand helpCommand = new HelpCommand();
 
+        MyOrderInfoCommand myOrderInfoCommand = new MyOrderInfoCommand(userRepositoryService, orderRepositoryService);
+
         ShowCommand showCommand = new ShowCommand();
         showCommand.addSubcommand(new ShowUserSubcommand(userRepositoryService));
         showCommand.addSubcommand(new ShowRestaurantsSubcommand(restaurantRepositoryService));
@@ -75,9 +84,18 @@ public class FoodDeliveryService {
                 userRepositoryService,
                 deliveryPersonRepositoryService));
 
+        WorkCommand workCommand = new WorkCommand();
+        workCommand.addSubcommand(new WorkRestaurantCommand(restaurantRepositoryService,
+                deliveryPersonRepositoryService,
+                orderRepositoryService));
+        workCommand.addSubcommand(new WorkDeliveryPersonCommand(deliveryPersonRepositoryService,
+                orderRepositoryService));
+
         commands.add(helpCommand);
+        commands.add(myOrderInfoCommand);
         commands.add(showCommand);
         commands.add(createCommand);
+        commands.add(workCommand);
     }
 
     private static void populateTestData(){
@@ -100,7 +118,7 @@ public class FoodDeliveryService {
 
         Restaurant r1 = new Restaurant("La Rosa", List.of(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10));
 
-        Review r1Review1 = new Review(u1, "Great food and service!", 9);
+        Review r1Review1 = new Review(u1, "Great food and service!", 10);
         r1.addReview(r1Review1);
 
 
@@ -119,15 +137,21 @@ public class FoodDeliveryService {
         userRepositoryService.create(u5);
 
         Review r2Review1 = new Review(u1, "Great food and service!", 9);
-        r2.addReview(r1Review1);
-        Review r2Review2 = new Review(u2, "The chicken rice was delicious!", 8);
+        r2.addReview(r2Review1);
+        Review r2Review2 = new Review(u2, "The chicken rice was meh!", 6);
         r2.addReview(r2Review2);
         Review r2Review3 = new Review(u3, "The beef stew was amazing!", 10);
         r2.addReview(r2Review3);
 
-
         restaurantRepositoryService.create(r1);
         restaurantRepositoryService.create(r2);
+
+
+        Order o1 = new Order(u1.getUserInfo(), List.of(new OrderItem(m5, 2), new OrderItem(m8, 1), new OrderItem(m9, 10)), OrderStatus.PENDING);
+        Order o2 = new Order(u5.getUserInfo(), List.of(new OrderItem(m11, 1), new OrderItem(m15, 3)), OrderStatus.PENDING);
+
+        orderRepositoryService.create(o1, r1);
+        orderRepositoryService.create(o2, r2);
     }
 
     public static String getAllCommands(){

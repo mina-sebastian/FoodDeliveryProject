@@ -118,6 +118,7 @@ public class Restaurant implements Comparable<Restaurant>, Reviewable {
                 ", menu=" + Utils.objectListToString(menu) +
                 ", reviews=" + Utils.objectListToString(reviews) +
                 ", queue=" + Utils.queueToString(queue) +
+                ", averageRating=" + getAverageRating() +
                 '}';
     }
 
