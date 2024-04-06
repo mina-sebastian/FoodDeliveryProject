@@ -2,22 +2,21 @@ package me.mina.fooddeli.command.create;
 
 import me.mina.fooddeli.command.Command;
 import me.mina.fooddeli.daoservices.UserRepositoryService;
-import me.mina.fooddeli.model.user.PremiumUser;
-import me.mina.fooddeli.model.user.User;
-import me.mina.fooddeli.model.user.UserInfo;
+import me.mina.fooddeli.model.person.PremiumUser;
+import me.mina.fooddeli.model.person.User;
+import me.mina.fooddeli.model.person.UserInfo;
 
 public class CreateUserSubcommand extends Command {
 
     UserRepositoryService userRepositoryService;
 
     public CreateUserSubcommand(UserRepositoryService userRepositoryService) {
-        super("user");
+        super("users");
         this.userRepositoryService = userRepositoryService;
     }
 
     @Override
     public String execute() {
-
         try{
             System.out.println("Creating user...");
             System.out.println("Enter username: ");

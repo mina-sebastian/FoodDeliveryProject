@@ -1,10 +1,5 @@
-package me.mina.fooddeli.model.user;
+package me.mina.fooddeli.model.person;
 
-import me.mina.fooddeli.utils.Utils;
-import me.mina.fooddeli.model.order.Order;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class User extends Person {

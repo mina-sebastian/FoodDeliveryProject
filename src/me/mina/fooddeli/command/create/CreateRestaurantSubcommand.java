@@ -2,12 +2,8 @@ package me.mina.fooddeli.command.create;
 
 import me.mina.fooddeli.command.Command;
 import me.mina.fooddeli.daoservices.RestaurantRepositoryService;
-import me.mina.fooddeli.daoservices.UserRepositoryService;
 import me.mina.fooddeli.model.restaurant.MenuItem;
 import me.mina.fooddeli.model.restaurant.Restaurant;
-import me.mina.fooddeli.model.user.PremiumUser;
-import me.mina.fooddeli.model.user.User;
-import me.mina.fooddeli.model.user.UserInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

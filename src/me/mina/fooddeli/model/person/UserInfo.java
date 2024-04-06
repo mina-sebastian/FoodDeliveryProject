@@ -1,4 +1,4 @@
-package me.mina.fooddeli.model.user;
+package me.mina.fooddeli.model.person;
 
 import java.util.Objects;
 

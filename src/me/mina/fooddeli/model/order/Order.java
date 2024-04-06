@@ -1,7 +1,7 @@
 package me.mina.fooddeli.model.order;
 
 import me.mina.fooddeli.utils.Utils;
-import me.mina.fooddeli.model.user.UserInfo;
+import me.mina.fooddeli.model.person.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;

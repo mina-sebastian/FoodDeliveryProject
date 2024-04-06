@@ -7,7 +7,6 @@ import me.mina.fooddeli.model.order.Order;
 import me.mina.fooddeli.model.order.OrderItem;
 import me.mina.fooddeli.model.order.OrderStatus;
 import me.mina.fooddeli.model.restaurant.Restaurant;
-import me.mina.fooddeli.model.user.DeliveryPerson;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,10 +42,13 @@ public class OrderRepositoryService {
         return orders;
     }
 
-    public void create(Order order, Restaurant restaurant, DeliveryPerson deliveryPerson) {
+    public void create(Order order, Restaurant restaurant) {
         orderDao.create(order);
         // If database fails, do not add to the list
         orders.add(order);
+
+        FoodDeliveryService.getRestaurantRepositoryService()
+                .addOrder(restaurant.getId(), order);
     }
 
     public void update(int id, Order order) {

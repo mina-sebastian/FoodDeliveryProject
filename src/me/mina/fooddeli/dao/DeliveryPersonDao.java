@@ -1,6 +1,6 @@
 package me.mina.fooddeli.dao;
 
-import me.mina.fooddeli.model.user.DeliveryPerson;
+import me.mina.fooddeli.model.person.DeliveryPerson;
 
 import java.util.ArrayList;
 import java.util.List;

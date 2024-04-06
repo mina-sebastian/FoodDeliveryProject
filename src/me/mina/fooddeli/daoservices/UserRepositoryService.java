@@ -1,9 +1,8 @@
 package me.mina.fooddeli.daoservices;
 
 import me.mina.fooddeli.dao.UserDao;
-import me.mina.fooddeli.model.restaurant.Restaurant;
-import me.mina.fooddeli.model.user.PremiumUser;
-import me.mina.fooddeli.model.user.User;
+import me.mina.fooddeli.model.person.PremiumUser;
+import me.mina.fooddeli.model.person.User;
 
 import java.util.List;
 import java.util.Optional;

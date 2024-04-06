@@ -2,21 +2,17 @@ package me.mina.fooddeli;
 
 import me.mina.fooddeli.command.Command;
 import me.mina.fooddeli.command.HelpCommand;
-import me.mina.fooddeli.command.create.CreateCommand;
-import me.mina.fooddeli.command.create.CreateRestaurantSubcommand;
-import me.mina.fooddeli.command.create.CreateUserSubcommand;
-import me.mina.fooddeli.command.show.ShowCommand;
-import me.mina.fooddeli.command.show.ShowRestaurantsSubcommand;
-import me.mina.fooddeli.command.show.ShowUserSubcommand;
+import me.mina.fooddeli.command.create.*;
+import me.mina.fooddeli.command.show.*;
 import me.mina.fooddeli.daoservices.DeliveryPersonRepositoryService;
 import me.mina.fooddeli.daoservices.OrderRepositoryService;
 import me.mina.fooddeli.daoservices.RestaurantRepositoryService;
 import me.mina.fooddeli.daoservices.UserRepositoryService;
 import me.mina.fooddeli.model.restaurant.MenuItem;
 import me.mina.fooddeli.model.restaurant.Restaurant;
-import me.mina.fooddeli.model.user.PremiumUser;
-import me.mina.fooddeli.model.user.User;
-import me.mina.fooddeli.model.user.UserInfo;
+import me.mina.fooddeli.model.person.PremiumUser;
+import me.mina.fooddeli.model.person.User;
+import me.mina.fooddeli.model.person.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +25,6 @@ public class FoodDeliveryService {
     private static UserRepositoryService userRepositoryService;
 
     private static List<Command> commands;
-
     private static boolean testPopulated = false;
 
     public static void init(){
@@ -63,10 +58,16 @@ public class FoodDeliveryService {
         ShowCommand showCommand = new ShowCommand();
         showCommand.addSubcommand(new ShowUserSubcommand(userRepositoryService));
         showCommand.addSubcommand(new ShowRestaurantsSubcommand(restaurantRepositoryService));
+        showCommand.addSubcommand(new ShowOrderSubcommand(orderRepositoryService));
+        showCommand.addSubcommand(new ShowDeliveryPersonSubcommand(deliveryPersonRepositoryService));
 
         CreateCommand createCommand = new CreateCommand();
         createCommand.addSubcommand(new CreateUserSubcommand(userRepositoryService));
         createCommand.addSubcommand(new CreateRestaurantSubcommand(restaurantRepositoryService));
+        createCommand.addSubcommand(new CreateOrderSubcommand(restaurantRepositoryService,
+                orderRepositoryService,
+                userRepositoryService));
+        createCommand.addSubcommand(new CreateDeliveryPersonSubcommand(deliveryPersonRepositoryService));
 
         commands.add(helpCommand);
         commands.add(showCommand);

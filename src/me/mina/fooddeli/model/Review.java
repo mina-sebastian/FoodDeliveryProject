@@ -1,7 +1,6 @@
 package me.mina.fooddeli.model;
 
-import me.mina.fooddeli.model.user.Person;
-import me.mina.fooddeli.model.user.User;
+import me.mina.fooddeli.model.person.User;
 
 import java.util.Objects;
 

@@ -10,6 +10,8 @@ import me.mina.fooddeli.model.order.Order;
 import me.mina.fooddeli.model.restaurant.MenuItem;
 import me.mina.fooddeli.model.restaurant.Restaurant;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +50,7 @@ public class RestaurantRepositoryService {
     }
 
     public List<Restaurant> getAll() {
+        Collections.sort(restaurants);
         return restaurants;
     }
 
@@ -179,6 +182,18 @@ public class RestaurantRepositoryService {
             reviewDao.delete(review);
             restaurantDao.update(restaurantId, restaurant);
         }
+    }
+
+    public Optional<Restaurant> findRestaurantByName(String name) {
+        return restaurants.stream()
+                .filter(restaurant -> restaurant.getName().equals(name))
+                .findFirst();
+    }
+
+    public Optional<MenuItem> findMenuItemByName(Restaurant restaurant, String name) {
+        return restaurant.getMenu().stream()
+                .filter(menuItem -> menuItem.getName().equalsIgnoreCase(name))
+                .findFirst();
     }
 
 }

@@ -1,7 +1,7 @@
 package me.mina.fooddeli.dao;
 
-import me.mina.fooddeli.model.user.User;
-import me.mina.fooddeli.model.user.PremiumUser;
+import me.mina.fooddeli.model.person.User;
+import me.mina.fooddeli.model.person.PremiumUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -5,8 +5,9 @@ import me.mina.fooddeli.dao.DeliveryPersonDao;
 import me.mina.fooddeli.dao.ReviewDao;
 import me.mina.fooddeli.model.Review;
 import me.mina.fooddeli.model.order.Order;
-import me.mina.fooddeli.model.user.DeliveryPerson;
+import me.mina.fooddeli.model.person.DeliveryPerson;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,7 @@ public class DeliveryPersonRepositoryService {
     }
 
     public List<DeliveryPerson> getAll() {
+        Collections.sort(deliveryPersons);
         return deliveryPersons;
     }
 
