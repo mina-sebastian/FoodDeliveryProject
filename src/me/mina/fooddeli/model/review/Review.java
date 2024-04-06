@@ -1,4 +1,4 @@
-package me.mina.fooddeli.model;
+package me.mina.fooddeli.model.review;
 
 import me.mina.fooddeli.model.person.User;
 
@@ -13,6 +13,12 @@ public class Review {
 
     public Review(int id, User user, String text, int rating) {
         this.id = id;
+        this.user = user;
+        this.text = text;
+        this.rating = rating;
+    }
+
+    public Review(User user, String text, int rating) {
         this.user = user;
         this.text = text;
         this.rating = rating;
@@ -53,9 +59,9 @@ public class Review {
     @Override
     public String toString() {
         return "Review{" +
-                "user=" + user +
-                ", text='" + text + '\'' +
+                "text='" + text + '\'' +
                 ", rating=" + rating +
+                ", user=" + user +
                 '}';
     }
 

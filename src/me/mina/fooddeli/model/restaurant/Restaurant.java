@@ -1,7 +1,7 @@
 package me.mina.fooddeli.model.restaurant;
 
-import me.mina.fooddeli.model.Review;
-import me.mina.fooddeli.model.Reviewable;
+import me.mina.fooddeli.model.review.Review;
+import me.mina.fooddeli.model.review.Reviewable;
 import me.mina.fooddeli.utils.Utils;
 import me.mina.fooddeli.model.order.Order;
 

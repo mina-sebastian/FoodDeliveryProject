@@ -3,7 +3,7 @@ package me.mina.fooddeli.daoservices;
 import me.mina.fooddeli.FoodDeliveryService;
 import me.mina.fooddeli.dao.DeliveryPersonDao;
 import me.mina.fooddeli.dao.ReviewDao;
-import me.mina.fooddeli.model.Review;
+import me.mina.fooddeli.model.review.Review;
 import me.mina.fooddeli.model.order.Order;
 import me.mina.fooddeli.model.person.DeliveryPerson;
 
@@ -125,7 +125,11 @@ public class DeliveryPersonRepositoryService {
                 });
     }
 
-
+    public Optional<DeliveryPerson> getByUsername(String username) {
+        return deliveryPersons.stream()
+                .filter(deliveryPerson -> deliveryPerson.getName().equals(username))
+                .findFirst();
+    }
 
 
 }

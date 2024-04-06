@@ -2,15 +2,13 @@ package me.mina.fooddeli.daoservices;
 
 import me.mina.fooddeli.FoodDeliveryService;
 import me.mina.fooddeli.dao.MenuItemDao;
-import me.mina.fooddeli.dao.OrderDao;
 import me.mina.fooddeli.dao.RestaurantDao;
 import me.mina.fooddeli.dao.ReviewDao;
-import me.mina.fooddeli.model.Review;
+import me.mina.fooddeli.model.review.Review;
 import me.mina.fooddeli.model.order.Order;
 import me.mina.fooddeli.model.restaurant.MenuItem;
 import me.mina.fooddeli.model.restaurant.Restaurant;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

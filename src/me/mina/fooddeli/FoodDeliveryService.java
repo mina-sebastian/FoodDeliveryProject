@@ -13,6 +13,7 @@ import me.mina.fooddeli.model.restaurant.Restaurant;
 import me.mina.fooddeli.model.person.PremiumUser;
 import me.mina.fooddeli.model.person.User;
 import me.mina.fooddeli.model.person.UserInfo;
+import me.mina.fooddeli.model.review.Review;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,8 @@ public class FoodDeliveryService {
         showCommand.addSubcommand(new ShowRestaurantsSubcommand(restaurantRepositoryService));
         showCommand.addSubcommand(new ShowOrderSubcommand(orderRepositoryService));
         showCommand.addSubcommand(new ShowDeliveryPersonSubcommand(deliveryPersonRepositoryService));
+        showCommand.addSubcommand(new ShowReviewsSubcommand(restaurantRepositoryService,
+                deliveryPersonRepositoryService));
 
         CreateCommand createCommand = new CreateCommand();
         createCommand.addSubcommand(new CreateUserSubcommand(userRepositoryService));
@@ -68,6 +71,9 @@ public class FoodDeliveryService {
                 orderRepositoryService,
                 userRepositoryService));
         createCommand.addSubcommand(new CreateDeliveryPersonSubcommand(deliveryPersonRepositoryService));
+        createCommand.addSubcommand(new CreateReviewSubcommand(restaurantRepositoryService,
+                userRepositoryService,
+                deliveryPersonRepositoryService));
 
         commands.add(helpCommand);
         commands.add(showCommand);
@@ -94,6 +100,9 @@ public class FoodDeliveryService {
 
         Restaurant r1 = new Restaurant("La Rosa", List.of(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10));
 
+        Review r1Review1 = new Review(u1, "Great food and service!", 9);
+        r1.addReview(r1Review1);
+
 
         MenuItem m11 = new MenuItem("Spaghetti Carbonara", 12, List.of("Pasta", "Eggs", "Bacon", "Parmesan"));
         MenuItem m12 = new MenuItem("Greek Salad", 9, List.of("Tomatoes", "Cucumbers", "Olives", "Feta Cheese"));
@@ -108,6 +117,14 @@ public class FoodDeliveryService {
         userRepositoryService.create(u3);
         userRepositoryService.create(u4);
         userRepositoryService.create(u5);
+
+        Review r2Review1 = new Review(u1, "Great food and service!", 9);
+        r2.addReview(r1Review1);
+        Review r2Review2 = new Review(u2, "The chicken rice was delicious!", 8);
+        r2.addReview(r2Review2);
+        Review r2Review3 = new Review(u3, "The beef stew was amazing!", 10);
+        r2.addReview(r2Review3);
+
 
         restaurantRepositoryService.create(r1);
         restaurantRepositoryService.create(r2);

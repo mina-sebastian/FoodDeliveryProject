@@ -1,10 +1,7 @@
 package me.mina.fooddeli.model.restaurant;
 
-import me.mina.fooddeli.model.Review;
-import me.mina.fooddeli.model.Reviewable;
 import me.mina.fooddeli.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

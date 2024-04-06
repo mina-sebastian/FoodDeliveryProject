@@ -1,6 +1,6 @@
 package me.mina.fooddeli.utils;
 
-import me.mina.fooddeli.model.Review;
+import me.mina.fooddeli.model.review.Review;
 
 import java.util.List;
 import java.util.Queue;

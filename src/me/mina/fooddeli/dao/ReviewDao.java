@@ -1,6 +1,6 @@
 package me.mina.fooddeli.dao;
 
-import me.mina.fooddeli.model.Review;
+import me.mina.fooddeli.model.review.Review;
 
 import java.util.ArrayList;
 import java.util.List;
