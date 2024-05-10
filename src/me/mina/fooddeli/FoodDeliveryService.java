@@ -8,6 +8,7 @@ import me.mina.fooddeli.command.show.*;
 import me.mina.fooddeli.command.work.WorkCommand;
 import me.mina.fooddeli.command.work.WorkDeliveryPersonCommand;
 import me.mina.fooddeli.command.work.WorkRestaurantCommand;
+import me.mina.fooddeli.dao.ReviewDao;
 import me.mina.fooddeli.daoservices.DeliveryPersonRepositoryService;
 import me.mina.fooddeli.daoservices.OrderRepositoryService;
 import me.mina.fooddeli.daoservices.RestaurantRepositoryService;
@@ -32,6 +33,7 @@ public class FoodDeliveryService {
     private static OrderRepositoryService orderRepositoryService;
     private static RestaurantRepositoryService restaurantRepositoryService;
     private static UserRepositoryService userRepositoryService;
+    private static ReviewDao reviewDao;
 
     private static List<Command> commands;
     private static boolean testPopulated = false;
@@ -48,6 +50,9 @@ public class FoodDeliveryService {
         }
         if(userRepositoryService == null){
             userRepositoryService = new UserRepositoryService();
+        }
+        if(reviewDao == null){
+            reviewDao = new ReviewDao();
         }
 
         if(commands == null){
@@ -209,5 +214,9 @@ public class FoodDeliveryService {
 
     public static UserRepositoryService getUserRepositoryService() {
         return userRepositoryService;
+    }
+
+    public static ReviewDao getReviewDao() {
+        return reviewDao;
     }
 }
