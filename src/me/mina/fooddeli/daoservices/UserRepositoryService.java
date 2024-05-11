@@ -51,8 +51,8 @@ public class UserRepositoryService {
     }
 
     public void create(User user) {
-        userDao.create(user);
-        // If database fails, do not add to the list
+        int id = userDao.create(user);
+        user.setId(id);
         users.add(user);
     }
 

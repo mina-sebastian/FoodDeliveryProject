@@ -14,17 +14,12 @@ import java.util.Optional;
 public class DeliveryPersonRepositoryService {
 
     private static DeliveryPersonDao deliveryPersonDao;
-    private static ReviewDao reviewDao;
 
     private static List<DeliveryPerson> deliveryPersons;
 
     public DeliveryPersonRepositoryService() {
         if (deliveryPersonDao == null) {
             deliveryPersonDao = new DeliveryPersonDao();
-        }
-
-        if (reviewDao == null) {
-            reviewDao = new ReviewDao();
         }
 
         if (deliveryPersons == null) {
@@ -45,7 +40,8 @@ public class DeliveryPersonRepositoryService {
     }
 
     public void create(DeliveryPerson deliveryPerson) {
-        deliveryPersonDao.create(deliveryPerson);
+        int id = deliveryPersonDao.create(deliveryPerson);
+        deliveryPerson.setId(id);
         // If database fails, do not add to the list
         deliveryPersons.add(deliveryPerson);
     }
@@ -63,7 +59,6 @@ public class DeliveryPersonRepositoryService {
     public void delete(DeliveryPerson deliveryPerson) {
         deliveryPersonDao.delete(deliveryPerson);
         deliveryPersons.remove(deliveryPerson);
-        deliveryPerson.getReviews().forEach(review -> reviewDao.delete(review));
         FoodDeliveryService.getOrderRepositoryService().delete(deliveryPerson.getCurrentOrder());
     }
 
@@ -76,7 +71,7 @@ public class DeliveryPersonRepositoryService {
         Optional<DeliveryPerson> deliveryPersonOptional = get(deliveryPersonId);
         deliveryPersonOptional.ifPresent(deliveryPerson -> {
             deliveryPerson.addReview(review);
-            reviewDao.create(review);
+            deliveryPersonDao.update(deliveryPersonId, deliveryPerson);
         });
     }
 
@@ -84,8 +79,10 @@ public class DeliveryPersonRepositoryService {
         Optional<DeliveryPerson> deliveryPersonOptional = get(deliveryPersonId);
         deliveryPersonOptional.ifPresent(deliveryPerson -> {
             deliveryPerson.removeReview(review);
-            reviewDao.delete(review);
+            FoodDeliveryService.getReviewDao().delete(review);
+            deliveryPersonDao.update(deliveryPersonId, deliveryPerson);
         });
+
     }
 
     public void setCurrentOrder(int deliveryPersonId, int orderId) {

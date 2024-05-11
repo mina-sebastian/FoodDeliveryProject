@@ -26,9 +26,8 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
                 "reviews VARCHAR(255)" +
                 ");";
 
-        try{
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            Statement statement = connection.createStatement();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        try (Statement statement = connection.createStatement()){
             statement.execute(sql);
             System.out.println("Checked/created the table 'delivery_persons' successfully.");
         } catch (SQLException e) {
@@ -43,9 +42,8 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
     @Override
     public Optional<DeliveryPerson> get(int id) {
         String sql = "SELECT * FROM "+DELIVERY_PERSONS+" WHERE id = ?";
-        try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -61,9 +59,8 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
     public List<DeliveryPerson> getAll() {
         List<DeliveryPerson> deliveryPeople = new ArrayList<>();
         String sql = "SELECT * FROM " + DELIVERY_PERSONS;
-        try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 deliveryPeople.add(createDeliveryPersonFromResultSet(resultSet));
@@ -75,27 +72,41 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
     }
 
     @Override
-    public void create(DeliveryPerson obj) {
+    public int create(DeliveryPerson obj) {
         String sql = "INSERT INTO " + DELIVERY_PERSONS + " (name, password, current_order_id, reviews) VALUES (?, ?, ?, ?)";
-        try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+        for(int i = 0; i < obj.getReviews().size(); i++) {
+            Review review = obj.getReviews().get(i);
+            if(review.getId() < 1 || FoodDeliveryService.getReviewDao().get(review.getId()).isEmpty()) {
+                int reviewId = FoodDeliveryService.getReviewDao().create(review);
+                Optional<Review> newOptReview = FoodDeliveryService.getReviewDao().get(reviewId);
+                if(newOptReview.isPresent())
+                    obj.getReviews().set(i, newOptReview.get());
+            }
+        }
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, obj.getName());
             statement.setString(2, obj.getPassword());
             statement.setInt(3, obj.getCurrentOrder() != null ? obj.getCurrentOrder().getId() : -1);
             statement.setString(4, joinReviewIds(obj.getReviews()));
             statement.executeUpdate();
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -1;
     }
 
     @Override
     public void update(int id, DeliveryPerson obj) {
         String sql = "UPDATE " + DELIVERY_PERSONS + " SET name = ?, password = ?, current_order_id = ?, reviews = ? WHERE id = ?";
-        try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1, obj.getName());
             statement.setString(2, obj.getPassword());
             statement.setInt(3, obj.getCurrentOrder() != null ? obj.getCurrentOrder().getId() : -1);
@@ -105,6 +116,13 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
             if (affectedRows == 0) {
                 System.out.println("Update error: DeliveryPerson with id " + id + " not found");
             }
+            for(Review review : obj.getReviews()) {
+                if(review.getId() < 1 || FoodDeliveryService.getReviewDao().get(review.getId()).isEmpty()) {
+                    FoodDeliveryService.getReviewDao().create(review);
+                } else {
+                    FoodDeliveryService.getReviewDao().update(review.getId(), review);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -113,11 +131,13 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
     @Override
     public void delete(DeliveryPerson obj) {
         String sql = "DELETE FROM " + DELIVERY_PERSONS + " WHERE id = ?";
-        try {
-            Connection connection = DatabaseConnection.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setInt(1, obj.getId());
             statement.executeUpdate();
+            for (Review review : obj.getReviews()) {
+                FoodDeliveryService.getReviewDao().delete(review);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -125,7 +145,9 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
 
     private DeliveryPerson createDeliveryPersonFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
-        Order order = FoodDeliveryService.getOrderRepositoryService().get(resultSet.getInt("current_order_id")).orElse(null);
+        Order order = FoodDeliveryService.getOrderRepositoryService()
+                        .get(resultSet.getInt("current_order_id"))
+                        .orElse(null);
         List<Review> reviews = new ArrayList<>();
         int[] reviewIds = Arrays.stream(resultSet.getString("reviews").split(",")).mapToInt(Integer::parseInt).toArray();
         for (int reviewId : reviewIds) {

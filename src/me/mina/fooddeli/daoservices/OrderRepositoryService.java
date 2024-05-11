@@ -14,16 +14,11 @@ import java.util.stream.Collectors;
 
 public class OrderRepositoryService {
     private static OrderDao orderDao;
-    private static OrderItemDao orderItemDao;
     private static List<Order> orders;
 
     public OrderRepositoryService() {
         if (orderDao == null) {
             orderDao = new OrderDao();
-        }
-
-        if (orderItemDao == null) {
-            orderItemDao = new OrderItemDao();
         }
 
         if (orders == null) {
@@ -42,13 +37,14 @@ public class OrderRepositoryService {
         return orders;
     }
 
-    public void create(Order order, Restaurant restaurant) {
-        orderDao.create(order);
-        // If database fails, do not add to the list
+    public int create(Order order, Restaurant restaurant) {
+        int orderId = orderDao.create(order);
+        order.setId(orderId);
         orders.add(order);
 
         FoodDeliveryService.getRestaurantRepositoryService()
                 .addOrder(restaurant.getId(), order);
+        return orderId;
     }
 
     public void update(int id, Order order) {
@@ -68,7 +64,7 @@ public class OrderRepositoryService {
         FoodDeliveryService.getDeliveryPersonRepositoryService().deleteOrder(order.getId());
         FoodDeliveryService.getRestaurantRepositoryService().removeOrderFromAny(order.getId());
         orders.remove(order);
-        order.getItems().forEach(item -> orderItemDao.delete(item));
+        order.getItems().forEach(item -> FoodDeliveryService.getOrderItemDao().delete(item));
     }
 
     public void delete(int id) {
@@ -122,20 +118,21 @@ public class OrderRepositoryService {
 
     public void addOrderItem(int orderId, OrderItem orderItem) {
         get(orderId).ifPresent(order -> {
-            orderItemDao.create(orderItem);
+            int orderItemId = FoodDeliveryService.getOrderItemDao().create(orderItem);
+            orderItem.setId(orderItemId);
             order.getItems().add(orderItem);
             update(orderId, order);
         });
     }
 
     public void updateOrderItem(int orderItemId, OrderItem updatedOrderItem) {
-        orderItemDao.update(orderItemId, updatedOrderItem);
+        FoodDeliveryService.getOrderItemDao().update(orderItemId, updatedOrderItem);
     }
 
     public void deleteOrderItem(int orderItemId) {
-        Optional<OrderItem> orderItemOptional = orderItemDao.get(orderItemId);
+        Optional<OrderItem> orderItemOptional = FoodDeliveryService.getOrderItemDao().get(orderItemId);
         orderItemOptional.ifPresent(orderItem -> {
-            orderItemDao.delete(orderItem);
+            FoodDeliveryService.getOrderItemDao().delete(orderItem);
             get(orderItem.getId()).ifPresent(order -> {
                 order.getItems().remove(orderItem);
                 update(order.getId(), order);

@@ -8,6 +8,8 @@ import me.mina.fooddeli.command.show.*;
 import me.mina.fooddeli.command.work.WorkCommand;
 import me.mina.fooddeli.command.work.WorkDeliveryPersonCommand;
 import me.mina.fooddeli.command.work.WorkRestaurantCommand;
+import me.mina.fooddeli.dao.MenuItemDao;
+import me.mina.fooddeli.dao.OrderItemDao;
 import me.mina.fooddeli.dao.ReviewDao;
 import me.mina.fooddeli.daoservices.DeliveryPersonRepositoryService;
 import me.mina.fooddeli.daoservices.OrderRepositoryService;
@@ -23,9 +25,13 @@ import me.mina.fooddeli.model.person.PremiumUser;
 import me.mina.fooddeli.model.person.User;
 import me.mina.fooddeli.model.person.UserInfo;
 import me.mina.fooddeli.model.review.Review;
+import me.mina.fooddeli.utils.DatabaseConnection;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+
+import static me.mina.fooddeli.utils.Constants.*;
 
 public class FoodDeliveryService {
 
@@ -34,25 +40,49 @@ public class FoodDeliveryService {
     private static RestaurantRepositoryService restaurantRepositoryService;
     private static UserRepositoryService userRepositoryService;
     private static ReviewDao reviewDao;
+    private static MenuItemDao menuItemDao;
+    private static OrderItemDao orderItemDao;
 
     private static List<Command> commands;
     private static boolean testPopulated = false;
 
     public static void init(){
-        if(deliveryPersonRepositoryService == null){
-            deliveryPersonRepositoryService = new DeliveryPersonRepositoryService();
-        }
-        if(orderRepositoryService == null){
-            orderRepositoryService = new OrderRepositoryService();
-        }
-        if(restaurantRepositoryService == null){
-            restaurantRepositoryService = new RestaurantRepositoryService();
-        }
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        //Delete all data
+//        try {
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + DELIVERY_PERSONS + ";");
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + REVIEWS_TABLE + ";");
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + MENU_ITEMS_TABLE + ";");
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDERS_TABLE + ";");
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDER_ITEMS_TABLE + ";");
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + RESTAURANTS_TABLE + ";");
+//            connection.createStatement().execute("DROP TABLE IF EXISTS " + USERS_TABLE + ";");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         if(userRepositoryService == null){
             userRepositoryService = new UserRepositoryService();
         }
         if(reviewDao == null){
             reviewDao = new ReviewDao();
+        }
+        if(menuItemDao == null){
+            menuItemDao = new MenuItemDao();
+        }
+
+        if(orderItemDao == null){
+            orderItemDao = new OrderItemDao();
+        }
+
+        if(orderRepositoryService == null){
+            orderRepositoryService = new OrderRepositoryService();
+        }
+        if(deliveryPersonRepositoryService == null){
+            deliveryPersonRepositoryService = new DeliveryPersonRepositoryService();
+        }
+        if(restaurantRepositoryService == null){
+            restaurantRepositoryService = new RestaurantRepositoryService();
         }
 
         if(commands == null){
@@ -61,7 +91,7 @@ public class FoodDeliveryService {
 
         if(!testPopulated){
             testPopulated = true;
-            populateTestData();
+//            populateTestData();
          }
     }
 
@@ -218,5 +248,13 @@ public class FoodDeliveryService {
 
     public static ReviewDao getReviewDao() {
         return reviewDao;
+    }
+
+    public static MenuItemDao getMenuItemDao() {
+        return menuItemDao;
+    }
+
+    public static OrderItemDao getOrderItemDao() {
+        return orderItemDao;
     }
 }

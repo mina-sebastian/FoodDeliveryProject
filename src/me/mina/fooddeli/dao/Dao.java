@@ -9,7 +9,7 @@ public interface Dao<T> {
     
     List<T> getAll();
     
-    void create(T t);
+    int create(T t);
     
     void update(int id, T t);
     

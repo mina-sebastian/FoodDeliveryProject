@@ -16,9 +16,7 @@ import java.util.Optional;
 public class RestaurantRepositoryService {
 
     private static RestaurantDao restaurantDao;
-    private static MenuItemDao menuItemDao;
 
-    private static ReviewDao reviewDao;
 
     private static List<Restaurant> restaurants;
     public RestaurantRepositoryService() {
@@ -26,13 +24,6 @@ public class RestaurantRepositoryService {
             restaurantDao = new RestaurantDao();
         }
 
-        if(menuItemDao == null) {
-            menuItemDao = new MenuItemDao();
-        }
-
-        if(reviewDao == null) {
-            reviewDao = new ReviewDao();
-        }
 
 
         if(restaurants == null) {
@@ -53,7 +44,8 @@ public class RestaurantRepositoryService {
     }
 
     public void create(Restaurant restaurant) {
-        restaurantDao.create(restaurant);
+        int id = restaurantDao.create(restaurant);
+        restaurant.setId(id);
         // If database fails, do not add to the list
         restaurants.add(restaurant);
     }
@@ -74,8 +66,8 @@ public class RestaurantRepositoryService {
         restaurantDao.delete(restaurant);
         // If database fails, do not delete from the list
         restaurants.remove(restaurant);
-        restaurant.getMenu().forEach(menuItem -> menuItemDao.delete(menuItem));
-        restaurant.getReviews().forEach(review -> reviewDao.delete(review));
+        restaurant.getMenu().forEach(menuItem -> FoodDeliveryService.getMenuItemDao().delete(menuItem));
+        restaurant.getReviews().forEach(review -> FoodDeliveryService.getReviewDao().delete(review));
     }
 
     public void delete(int id) {
@@ -90,7 +82,8 @@ public class RestaurantRepositoryService {
         if(restaurantOptional.isPresent()) {
             Restaurant restaurant = restaurantOptional.get();
             restaurant.getMenu().add(menuItem);
-            menuItemDao.create(menuItem);
+            int menuItemId = FoodDeliveryService.getMenuItemDao().create(menuItem);
+            menuItem.setId(menuItemId);
             restaurantDao.update(restaurantId, restaurant);
         }
     }
@@ -101,7 +94,7 @@ public class RestaurantRepositoryService {
             Restaurant restaurant = restaurantOptional.get();
             restaurant.getMenu().remove(menuItem);
             restaurant.getMenu().add(menuItem);
-            menuItemDao.update(menuItem.getId(), menuItem);
+            FoodDeliveryService.getMenuItemDao().update(menuItem.getId(), menuItem);
             restaurantDao.update(restaurantId, restaurant);
         }
     }
@@ -111,7 +104,7 @@ public class RestaurantRepositoryService {
         if(restaurantOptional.isPresent()) {
             Restaurant restaurant = restaurantOptional.get();
             restaurant.getMenu().remove(menuItem);
-            menuItemDao.delete(menuItem);
+            FoodDeliveryService.getMenuItemDao().delete(menuItem);
             restaurantDao.update(restaurantId, restaurant);
         }
     }
@@ -156,7 +149,8 @@ public class RestaurantRepositoryService {
         if(restaurantOptional.isPresent()) {
             Restaurant restaurant = restaurantOptional.get();
             restaurant.addReview(review);
-            reviewDao.create(review);
+            int reviewId = FoodDeliveryService.getReviewDao().create(review);
+            review.setId(reviewId);
             restaurantDao.update(restaurantId, restaurant);
         }
     }
@@ -167,7 +161,7 @@ public class RestaurantRepositoryService {
             Restaurant restaurant = restaurantOptional.get();
             restaurant.getReviews().remove(review);
             restaurant.getReviews().add(review);
-            reviewDao.update(review.getId(), review);
+            FoodDeliveryService.getReviewDao().update(review.getId(), review);
             restaurantDao.update(restaurantId, restaurant);
         }
     }
@@ -177,7 +171,7 @@ public class RestaurantRepositoryService {
         if(restaurantOptional.isPresent()) {
             Restaurant restaurant = restaurantOptional.get();
             restaurant.getReviews().remove(review);
-            reviewDao.delete(review);
+            FoodDeliveryService.getReviewDao().delete(review);
             restaurantDao.update(restaurantId, restaurant);
         }
     }

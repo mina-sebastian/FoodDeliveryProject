@@ -17,7 +17,7 @@ public class ShowOrderSubcommand extends Command {
 
     @Override
     public String execute() {
-        System.out.println("Showing restaurants...");
+        System.out.println("Showing orders...");
         return Utils.objectListToString(orderRepositoryService.getAll());
     }
 }
