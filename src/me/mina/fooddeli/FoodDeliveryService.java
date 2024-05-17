@@ -57,10 +57,15 @@ public class FoodDeliveryService {
             connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDER_ITEMS_TABLE + ";");
             connection.createStatement().execute("DROP TABLE IF EXISTS " + RESTAURANTS_TABLE + ";");
             connection.createStatement().execute("DROP TABLE IF EXISTS " + USERS_TABLE + ";");
-
+            connection.createStatement().execute("DROP DATABASE IF EXISTS " + JDBC_DATABASE_NAME + ";");
+            //Create database
+            connection.createStatement().execute("CREATE DATABASE IF NOT EXISTS " + JDBC_DATABASE_NAME + ";");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
         if(userRepositoryService == null){
             userRepositoryService = new UserRepositoryService();
         }
