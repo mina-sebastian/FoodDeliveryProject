@@ -26,9 +26,9 @@ public class OrderDao implements Dao<Order> {
     private void createTableIfNotExists() {
         String sql = "CREATE TABLE IF NOT EXISTS "+ORDERS_TABLE+" (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY," +
-                "user_info VARCHAR(255)," +
-                "status VARCHAR(255)," +
-                "items VARCHAR(255)" +
+                "user_info TEXT," +
+                "status TEXT," +
+                "items TEXT" +
                 ");";
         Connection connection = DatabaseConnection.getInstance().getConnection();
         try (Statement statement = connection.createStatement()) {

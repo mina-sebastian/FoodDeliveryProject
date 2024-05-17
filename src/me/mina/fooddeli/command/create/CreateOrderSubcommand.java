@@ -37,7 +37,7 @@ public class CreateOrderSubcommand extends Command {
                 .map(Restaurant::getName)
                 .reduce("", (acc, restaurantName) -> acc + restaurantName + ", ");
         System.out.println("Available restaurants: " + availableRestaurants);
-        System.out.println("Chose restaurant: ");
+        System.out.println("Choose restaurant: ");
         String restaurantName = getScanner().nextLine();
         Optional<Restaurant> restaurantOptional = restaurantRepositoryService
                                                     .findRestaurantByName(restaurantName);

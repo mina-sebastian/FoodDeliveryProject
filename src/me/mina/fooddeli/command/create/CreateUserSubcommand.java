@@ -11,7 +11,7 @@ public class CreateUserSubcommand extends Command {
     UserRepositoryService userRepositoryService;
 
     public CreateUserSubcommand(UserRepositoryService userRepositoryService) {
-        super("users");
+        super("user");
         this.userRepositoryService = userRepositoryService;
     }
 
@@ -25,6 +25,7 @@ public class CreateUserSubcommand extends Command {
             String password = getScanner().nextLine();
             System.out.println("Enter address: ");
             String address = getScanner().nextLine();
+            address = address.trim().replaceAll(",", ";");
             System.out.println("Enter phone number: ");
             String phone = getScanner().nextLine();
             System.out.println("Is premium? (true/false): ");

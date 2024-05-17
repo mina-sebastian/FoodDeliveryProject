@@ -23,7 +23,7 @@ public class DeliveryPersonDao implements Dao<DeliveryPerson> {
                 "name VARCHAR(255) NOT NULL," +
                 "password VARCHAR(255) NOT NULL," +
                 "current_order_id INT," +
-                "reviews VARCHAR(255)" +
+                "reviews TEXT" +
                 ");";
 
         Connection connection = DatabaseConnection.getInstance().getConnection();

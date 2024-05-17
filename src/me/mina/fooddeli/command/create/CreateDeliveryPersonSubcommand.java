@@ -22,7 +22,6 @@ public class CreateDeliveryPersonSubcommand extends Command {
             String username = getScanner().nextLine();
             System.out.println("Enter password: ");
             String password = getScanner().nextLine();
-            System.out.println("Enter address: ");
 
             DeliveryPerson deliveryPerson = new DeliveryPerson(username, password);
 

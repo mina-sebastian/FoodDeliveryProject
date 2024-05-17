@@ -4,6 +4,8 @@ import me.mina.fooddeli.utils.DatabaseConnection;
 
 import java.util.Scanner;
 
+import static me.mina.fooddeli.utils.AuditGenerator.generateAuditFile;
+
 public class Main {
     private static Main instance;
     private static Scanner scanner;
@@ -21,6 +23,8 @@ public class Main {
         scanner = new Scanner(System.in);
         FoodDeliveryService.init();
         System.out.println(FoodDeliveryService.getAllCommands());
+
+        generateAuditFile();
 
         while (true) {
             System.out.println("Enter a command:");

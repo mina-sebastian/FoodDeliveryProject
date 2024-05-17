@@ -70,6 +70,8 @@ public class DeliveryPersonRepositoryService {
     public void addReview(int deliveryPersonId, Review review) {
         Optional<DeliveryPerson> deliveryPersonOptional = get(deliveryPersonId);
         deliveryPersonOptional.ifPresent(deliveryPerson -> {
+            int id = FoodDeliveryService.getReviewDao().create(review);
+            review.setId(id);
             deliveryPerson.addReview(review);
             deliveryPersonDao.update(deliveryPersonId, deliveryPerson);
         });

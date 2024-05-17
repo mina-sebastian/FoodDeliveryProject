@@ -52,7 +52,7 @@ public class WorkRestaurantCommand extends Command {
         }
 
         // Randomly change the current order
-        if(Math.random() > 0.15) {
+        if(Math.random() > 0.1) {
             if(Math.random() > 0.4) {
                 switch (order.getStatus()) {
                     case PENDING -> order.setStatus(OrderStatus.CONFIRMED);

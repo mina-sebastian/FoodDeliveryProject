@@ -49,18 +49,23 @@ public class FoodDeliveryService {
     public static void init(){
         Connection connection = DatabaseConnection.getInstance().getConnection();
         //Delete all data
-//        try {
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + DELIVERY_PERSONS + ";");
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + REVIEWS_TABLE + ";");
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + MENU_ITEMS_TABLE + ";");
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDERS_TABLE + ";");
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDER_ITEMS_TABLE + ";");
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + RESTAURANTS_TABLE + ";");
-//            connection.createStatement().execute("DROP TABLE IF EXISTS " + USERS_TABLE + ";");
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + DELIVERY_PERSONS + ";");
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + REVIEWS_TABLE + ";");
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + MENU_ITEMS_TABLE + ";");
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDERS_TABLE + ";");
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + ORDER_ITEMS_TABLE + ";");
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + RESTAURANTS_TABLE + ";");
+            connection.createStatement().execute("DROP TABLE IF EXISTS " + USERS_TABLE + ";");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(4000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if(userRepositoryService == null){
             userRepositoryService = new UserRepositoryService();
         }

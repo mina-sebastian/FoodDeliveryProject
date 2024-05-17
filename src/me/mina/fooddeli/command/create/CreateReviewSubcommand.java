@@ -1,6 +1,8 @@
 package me.mina.fooddeli.command.create;
 
+import me.mina.fooddeli.FoodDeliveryService;
 import me.mina.fooddeli.command.Command;
+import me.mina.fooddeli.dao.RestaurantDao;
 import me.mina.fooddeli.daoservices.DeliveryPersonRepositoryService;
 import me.mina.fooddeli.daoservices.OrderRepositoryService;
 import me.mina.fooddeli.daoservices.RestaurantRepositoryService;
@@ -67,8 +69,9 @@ public class CreateReviewSubcommand extends Command {
                 text = getScanner().nextLine();
                 System.out.println("Enter rating(1-10): ");
                 rating = getScanner().nextInt();
+                getScanner().nextLine();
                 review = new Review(userOptional.get(), text, rating);
-                deliveryPersonOptional.get().addReview(review);
+                FoodDeliveryService.getDeliveryPersonRepositoryService().addReview(deliveryPersonOptional.get().getId(), review);
                 return "Created review: " + review;
             case "restaurant":
                 System.out.println("Enter restaurant name: ");
@@ -82,8 +85,9 @@ public class CreateReviewSubcommand extends Command {
                 text = getScanner().nextLine();
                 System.out.println("Enter rating(1-10): ");
                 rating = getScanner().nextInt();
+                getScanner().nextLine();
                 review = new Review(userOptional.get(), text, rating);
-                restaurantOptional.get().addReview(review);
+                FoodDeliveryService.getRestaurantRepositoryService().addReview(restaurantOptional.get().getId(), review);
                 return "Created review: " + review;
             default:
                 return "Invalid choice.";

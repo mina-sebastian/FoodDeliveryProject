@@ -49,7 +49,7 @@ public class WorkDeliveryPersonCommand extends Command {
         }
 
         // Randomly change the current order
-        if(Math.random() > 0.15) {
+        if(Math.random() > 0.1) {
             if(Math.random() > 0.4) {
                 switch (order.getStatus()) {
                     case READY -> order.setStatus(OrderStatus.ON_THE_WAY);
