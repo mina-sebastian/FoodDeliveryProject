@@ -1,6 +1,9 @@
 # Order Delivery System
 ## Descriere
 Pentru a folosi sistemul, s-a implementat un sistem de tip "Command" care permite utilizatorului sa introduca comenzile dorite.
+## Baza de date
+Constantele pentru conexiunea la baza de date sunt in clasa "Constants" din package-ul utils.
+Datele de test sunt create in `FoodDeliveryService`, in functia [populateTestData()](https://github.com/mina-sebastian/FoodDeliveryProject/blob/efce127c928f6d8b391a2a4e6d975f80cb00a82f/src/me/mina/fooddeli/FoodDeliveryService.java#L137)
 ## Comenzi
 - `help` - afiseaza lista comenzilor posibile
 - `myorderinfo` - afiseaza informatiile despre comenzile utilizatorului.
