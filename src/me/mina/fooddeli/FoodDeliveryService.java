@@ -61,11 +61,6 @@ public class FoodDeliveryService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            Thread.sleep(4000);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         if(userRepositoryService == null){
             userRepositoryService = new UserRepositoryService();
         }
@@ -96,7 +91,7 @@ public class FoodDeliveryService {
 
         if(!testPopulated){
             testPopulated = true;
-//            populateTestData();
+            populateTestData();
          }
     }
 
