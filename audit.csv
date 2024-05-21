@@ -374,3 +374,379 @@ DeliveryPerson{id='1', name='Jerry', password='iamjerry', currentOrder=null, rev
 Review{text='Fast delivery!', rating=10, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}, 
 Review{text='The delivery was late!', rating=4, user=User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}}}
 ], averageRating=7.0};2024-05-17T13:03:12.817632300
+Users Section;2024-05-21T14:03:02.703099323
+User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}};2024-05-21T14:03:02.710032915
+User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}};2024-05-21T14:03:02.710258488
+User{name='SamJohnson', password='SammyJ2024#', userInfo=UserInfo{address='789 Pine Road, Metropolis', phoneNumber='555-0303'}};2024-05-21T14:03:02.710434932
+PremiumUser{name='LizBrown', password='LizB*Pass78', userInfo=UserInfo{address='321 Birch Ave, Star City', phoneNumber='555-0404'}, discountRate=15.6};2024-05-21T14:03:02.716913571
+PremiumUser{name='MikeDavis', password='MDavis$432', userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, discountRate=70.88};2024-05-21T14:03:02.717109463
+Premium Users Section;2024-05-21T14:03:02.717847664
+PremiumUser{name='LizBrown', password='LizB*Pass78', userInfo=UserInfo{address='321 Birch Ave, Star City', phoneNumber='555-0404'}, discountRate=15.6};2024-05-21T14:03:02.718009896
+PremiumUser{name='MikeDavis', password='MDavis$432', userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, discountRate=70.88};2024-05-21T14:03:02.718125915
+Restaurants Section;2024-05-21T14:03:02.721251283
+Restaurant{id=1, name='La Rosa', menu=[
+MenuItem{id=1, name='Chicken Rice', price=10.0, ingredients=[
+Rice, 
+Chicken, 
+Soy Sauce
+]}, 
+MenuItem{id=2, name='Beef Stew', price=15.0, ingredients=[
+Beef, 
+Potatoes, 
+Carrots, 
+Onions
+]}, 
+MenuItem{id=3, name='Vegetable Pasta', price=12.0, ingredients=[
+Pasta, 
+Tomatoes, 
+Zucchini, 
+Bell Peppers
+]}, 
+MenuItem{id=4, name='Fish Tacos', price=8.0, ingredients=[
+Fish, 
+Corn Tortillas, 
+Cabbage, 
+Lime
+]}, 
+MenuItem{id=5, name='Mushroom Risotto', price=14.0, ingredients=[
+Rice, 
+Mushrooms, 
+Parmesan, 
+Onions
+]}, 
+MenuItem{id=6, name='Pork Ramen', price=13.0, ingredients=[
+Noodles, 
+Pork, 
+Eggs, 
+Green Onions, 
+Broth
+]}, 
+MenuItem{id=7, name='Caesar Salad', price=9.0, ingredients=[
+Lettuce, 
+Croutons, 
+Parmesan, 
+Caesar Dressing
+]}, 
+MenuItem{id=8, name='BBQ Ribs', price=18.0, ingredients=[
+Pork Ribs, 
+BBQ Sauce, 
+Coleslaw
+]}, 
+MenuItem{id=9, name='Quiche Lorraine', price=11.0, ingredients=[
+Eggs, 
+Bacon, 
+Cheese, 
+Pie Crust
+]}, 
+MenuItem{id=10, name='Tom Yum Soup', price=10.0, ingredients=[
+Broth, 
+Shrimp, 
+Mushrooms, 
+Lemongrass, 
+Chili Peppers
+]}
+], reviews=[
+Review{text='Great food and service!', rating=10, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}
+], queue=[
+Order{id=1, status=Pending, userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}, items=[
+OrderItem{id=1, quantity=2, item=MenuItem{id=5, name='Mushroom Risotto', price=14.0, ingredients=[
+Rice, 
+Mushrooms, 
+Parmesan, 
+Onions
+]}}, 
+OrderItem{id=2, quantity=1, item=MenuItem{id=8, name='BBQ Ribs', price=18.0, ingredients=[
+Pork Ribs, 
+BBQ Sauce, 
+Coleslaw
+]}}, 
+OrderItem{id=3, quantity=10, item=MenuItem{id=9, name='Quiche Lorraine', price=11.0, ingredients=[
+Eggs, 
+Bacon, 
+Cheese, 
+Pie Crust
+]}}
+]}
+], averageRating=10.0};2024-05-21T14:03:02.750346469
+Restaurant{id=2, name='Bistro Gourmet', menu=[
+MenuItem{id=11, name='Spaghetti Carbonara', price=12.0, ingredients=[
+Pasta, 
+Eggs, 
+Bacon, 
+Parmesan
+]}, 
+MenuItem{id=12, name='Greek Salad', price=9.0, ingredients=[
+Tomatoes, 
+Cucumbers, 
+Olives, 
+Feta Cheese
+]}, 
+MenuItem{id=13, name='Lamb Curry', price=16.0, ingredients=[
+Lamb, 
+Curry Powder, 
+Coconut Milk, 
+Rice
+]}, 
+MenuItem{id=14, name='Margherita Pizza', price=10.0, ingredients=[
+Dough, 
+Tomato Sauce, 
+Mozzarella, 
+Basil
+]}, 
+MenuItem{id=15, name='Duck Confit', price=20.0, ingredients=[
+Duck, 
+Potatoes, 
+Garlic, 
+Thyme
+]}
+], reviews=[
+Review{text='Great food and service!', rating=9, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}, 
+Review{text='The chicken rice was meh!', rating=6, user=User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}}}, 
+Review{text='The beef stew was amazing!', rating=10, user=User{name='SamJohnson', password='SammyJ2024#', userInfo=UserInfo{address='789 Pine Road, Metropolis', phoneNumber='555-0303'}}}
+], queue=[
+Order{id=2, status=Pending, userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, items=[
+OrderItem{id=4, quantity=1, item=MenuItem{id=11, name='Spaghetti Carbonara', price=12.0, ingredients=[
+Pasta, 
+Eggs, 
+Bacon, 
+Parmesan
+]}}, 
+OrderItem{id=5, quantity=3, item=MenuItem{id=15, name='Duck Confit', price=20.0, ingredients=[
+Duck, 
+Potatoes, 
+Garlic, 
+Thyme
+]}}
+]}
+], averageRating=8.333333333333334};2024-05-21T14:03:02.751303556
+Orders Section;2024-05-21T14:03:02.751491513
+Order{id=1, status=Pending, userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}, items=[
+OrderItem{id=1, quantity=2, item=MenuItem{id=5, name='Mushroom Risotto', price=14.0, ingredients=[
+Rice, 
+Mushrooms, 
+Parmesan, 
+Onions
+]}}, 
+OrderItem{id=2, quantity=1, item=MenuItem{id=8, name='BBQ Ribs', price=18.0, ingredients=[
+Pork Ribs, 
+BBQ Sauce, 
+Coleslaw
+]}}, 
+OrderItem{id=3, quantity=10, item=MenuItem{id=9, name='Quiche Lorraine', price=11.0, ingredients=[
+Eggs, 
+Bacon, 
+Cheese, 
+Pie Crust
+]}}
+]};2024-05-21T14:03:02.751827100
+Order{id=2, status=Pending, userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, items=[
+OrderItem{id=4, quantity=1, item=MenuItem{id=11, name='Spaghetti Carbonara', price=12.0, ingredients=[
+Pasta, 
+Eggs, 
+Bacon, 
+Parmesan
+]}}, 
+OrderItem{id=5, quantity=3, item=MenuItem{id=15, name='Duck Confit', price=20.0, ingredients=[
+Duck, 
+Potatoes, 
+Garlic, 
+Thyme
+]}}
+]};2024-05-21T14:03:02.752151314
+Delivery Persons Section;2024-05-21T14:03:02.752319893
+DeliveryPerson{id='2', name='Tom', password='iamtom', currentOrder=null, reviews=[
+Review{text='The delivery person was very polite!', rating=9, user=User{name='SamJohnson', password='SammyJ2024#', userInfo=UserInfo{address='789 Pine Road, Metropolis', phoneNumber='555-0303'}}}, 
+Review{text='The delivery person was nice!', rating=9, user=PremiumUser{name='LizBrown', password='LizB*Pass78', userInfo=UserInfo{address='321 Birch Ave, Star City', phoneNumber='555-0404'}, discountRate=15.6}}
+], averageRating=9.0};2024-05-21T14:03:02.753476441
+DeliveryPerson{id='1', name='Jerry', password='iamjerry', currentOrder=null, reviews=[
+Review{text='Fast delivery!', rating=10, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}, 
+Review{text='The delivery was late!', rating=4, user=User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}}}
+], averageRating=7.0};2024-05-21T14:03:02.753956221
+Users Section;2024-05-21T14:04:13.653476465
+User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}};2024-05-21T14:04:13.659286802
+User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}};2024-05-21T14:04:13.659445238
+User{name='SamJohnson', password='SammyJ2024#', userInfo=UserInfo{address='789 Pine Road, Metropolis', phoneNumber='555-0303'}};2024-05-21T14:04:13.659542583
+PremiumUser{name='LizBrown', password='LizB*Pass78', userInfo=UserInfo{address='321 Birch Ave, Star City', phoneNumber='555-0404'}, discountRate=15.6};2024-05-21T14:04:13.664876527
+PremiumUser{name='MikeDavis', password='MDavis$432', userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, discountRate=70.88};2024-05-21T14:04:13.665057946
+Premium Users Section;2024-05-21T14:04:13.665836127
+PremiumUser{name='LizBrown', password='LizB*Pass78', userInfo=UserInfo{address='321 Birch Ave, Star City', phoneNumber='555-0404'}, discountRate=15.6};2024-05-21T14:04:13.665995136
+PremiumUser{name='MikeDavis', password='MDavis$432', userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, discountRate=70.88};2024-05-21T14:04:13.666119924
+Restaurants Section;2024-05-21T14:04:13.668674112
+Restaurant{id=1, name='La Rosa', menu=[
+MenuItem{id=1, name='Chicken Rice', price=10.0, ingredients=[
+Rice, 
+Chicken, 
+Soy Sauce
+]}, 
+MenuItem{id=2, name='Beef Stew', price=15.0, ingredients=[
+Beef, 
+Potatoes, 
+Carrots, 
+Onions
+]}, 
+MenuItem{id=3, name='Vegetable Pasta', price=12.0, ingredients=[
+Pasta, 
+Tomatoes, 
+Zucchini, 
+Bell Peppers
+]}, 
+MenuItem{id=4, name='Fish Tacos', price=8.0, ingredients=[
+Fish, 
+Corn Tortillas, 
+Cabbage, 
+Lime
+]}, 
+MenuItem{id=5, name='Mushroom Risotto', price=14.0, ingredients=[
+Rice, 
+Mushrooms, 
+Parmesan, 
+Onions
+]}, 
+MenuItem{id=6, name='Pork Ramen', price=13.0, ingredients=[
+Noodles, 
+Pork, 
+Eggs, 
+Green Onions, 
+Broth
+]}, 
+MenuItem{id=7, name='Caesar Salad', price=9.0, ingredients=[
+Lettuce, 
+Croutons, 
+Parmesan, 
+Caesar Dressing
+]}, 
+MenuItem{id=8, name='BBQ Ribs', price=18.0, ingredients=[
+Pork Ribs, 
+BBQ Sauce, 
+Coleslaw
+]}, 
+MenuItem{id=9, name='Quiche Lorraine', price=11.0, ingredients=[
+Eggs, 
+Bacon, 
+Cheese, 
+Pie Crust
+]}, 
+MenuItem{id=10, name='Tom Yum Soup', price=10.0, ingredients=[
+Broth, 
+Shrimp, 
+Mushrooms, 
+Lemongrass, 
+Chili Peppers
+]}
+], reviews=[
+Review{text='Great food and service!', rating=10, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}
+], queue=[
+Order{id=1, status=Pending, userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}, items=[
+OrderItem{id=1, quantity=2, item=MenuItem{id=5, name='Mushroom Risotto', price=14.0, ingredients=[
+Rice, 
+Mushrooms, 
+Parmesan, 
+Onions
+]}}, 
+OrderItem{id=2, quantity=1, item=MenuItem{id=8, name='BBQ Ribs', price=18.0, ingredients=[
+Pork Ribs, 
+BBQ Sauce, 
+Coleslaw
+]}}, 
+OrderItem{id=3, quantity=10, item=MenuItem{id=9, name='Quiche Lorraine', price=11.0, ingredients=[
+Eggs, 
+Bacon, 
+Cheese, 
+Pie Crust
+]}}
+]}
+], averageRating=10.0};2024-05-21T14:04:13.692232060
+Restaurant{id=2, name='Bistro Gourmet', menu=[
+MenuItem{id=11, name='Spaghetti Carbonara', price=12.0, ingredients=[
+Pasta, 
+Eggs, 
+Bacon, 
+Parmesan
+]}, 
+MenuItem{id=12, name='Greek Salad', price=9.0, ingredients=[
+Tomatoes, 
+Cucumbers, 
+Olives, 
+Feta Cheese
+]}, 
+MenuItem{id=13, name='Lamb Curry', price=16.0, ingredients=[
+Lamb, 
+Curry Powder, 
+Coconut Milk, 
+Rice
+]}, 
+MenuItem{id=14, name='Margherita Pizza', price=10.0, ingredients=[
+Dough, 
+Tomato Sauce, 
+Mozzarella, 
+Basil
+]}, 
+MenuItem{id=15, name='Duck Confit', price=20.0, ingredients=[
+Duck, 
+Potatoes, 
+Garlic, 
+Thyme
+]}
+], reviews=[
+Review{text='Great food and service!', rating=9, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}, 
+Review{text='The chicken rice was meh!', rating=6, user=User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}}}, 
+Review{text='The beef stew was amazing!', rating=10, user=User{name='SamJohnson', password='SammyJ2024#', userInfo=UserInfo{address='789 Pine Road, Metropolis', phoneNumber='555-0303'}}}
+], queue=[
+Order{id=2, status=Pending, userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, items=[
+OrderItem{id=4, quantity=1, item=MenuItem{id=11, name='Spaghetti Carbonara', price=12.0, ingredients=[
+Pasta, 
+Eggs, 
+Bacon, 
+Parmesan
+]}}, 
+OrderItem{id=5, quantity=3, item=MenuItem{id=15, name='Duck Confit', price=20.0, ingredients=[
+Duck, 
+Potatoes, 
+Garlic, 
+Thyme
+]}}
+]}
+], averageRating=8.333333333333334};2024-05-21T14:04:13.692974453
+Orders Section;2024-05-21T14:04:13.693195381
+Order{id=1, status=Pending, userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}, items=[
+OrderItem{id=1, quantity=2, item=MenuItem{id=5, name='Mushroom Risotto', price=14.0, ingredients=[
+Rice, 
+Mushrooms, 
+Parmesan, 
+Onions
+]}}, 
+OrderItem{id=2, quantity=1, item=MenuItem{id=8, name='BBQ Ribs', price=18.0, ingredients=[
+Pork Ribs, 
+BBQ Sauce, 
+Coleslaw
+]}}, 
+OrderItem{id=3, quantity=10, item=MenuItem{id=9, name='Quiche Lorraine', price=11.0, ingredients=[
+Eggs, 
+Bacon, 
+Cheese, 
+Pie Crust
+]}}
+]};2024-05-21T14:04:13.693540594
+Order{id=2, status=Pending, userInfo=UserInfo{address='654 Elm Street, Central City', phoneNumber='555-0505'}, items=[
+OrderItem{id=4, quantity=1, item=MenuItem{id=11, name='Spaghetti Carbonara', price=12.0, ingredients=[
+Pasta, 
+Eggs, 
+Bacon, 
+Parmesan
+]}}, 
+OrderItem{id=5, quantity=3, item=MenuItem{id=15, name='Duck Confit', price=20.0, ingredients=[
+Duck, 
+Potatoes, 
+Garlic, 
+Thyme
+]}}
+]};2024-05-21T14:04:13.693787339
+Delivery Persons Section;2024-05-21T14:04:13.693947299
+DeliveryPerson{id='2', name='Tom', password='iamtom', currentOrder=null, reviews=[
+Review{text='The delivery person was very polite!', rating=9, user=User{name='SamJohnson', password='SammyJ2024#', userInfo=UserInfo{address='789 Pine Road, Metropolis', phoneNumber='555-0303'}}}, 
+Review{text='The delivery person was nice!', rating=9, user=PremiumUser{name='LizBrown', password='LizB*Pass78', userInfo=UserInfo{address='321 Birch Ave, Star City', phoneNumber='555-0404'}, discountRate=15.6}}
+], averageRating=9.0};2024-05-21T14:04:13.694486942
+DeliveryPerson{id='1', name='Jerry', password='iamjerry', currentOrder=null, reviews=[
+Review{text='Fast delivery!', rating=10, user=User{name='AlexSmith', password='AlexPass123', userInfo=UserInfo{address='123 Maple Street, Springfield', phoneNumber='555-0101'}}}, 
+Review{text='The delivery was late!', rating=4, user=User{name='JenDoe', password='JenSecure!89', userInfo=UserInfo{address='456 Oak Lane, Gotham City', phoneNumber='555-0202'}}}
+], averageRating=7.0};2024-05-21T14:04:13.694845884

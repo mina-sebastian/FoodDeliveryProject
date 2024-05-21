@@ -58,7 +58,7 @@ public class OrderDao implements Dao<Order> {
     @Override
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<>();
-        String sql = "SELECT * FROM orders";
+        String sql = "SELECT * FROM " + ORDERS_TABLE + ";";
         Connection connection = DatabaseConnection.getInstance().getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
